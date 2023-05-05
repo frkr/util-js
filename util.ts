@@ -1,5 +1,4 @@
 // https://community.cloudflare.com/t/timeout-with-fetch/25249/5
-// 20230504 15h
 export async function fetchWithTimeout(fetchPromise: Promise<Response>, timeout = 120000): Promise<Response | null> {
     try {
 
