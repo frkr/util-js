@@ -1,21 +1,26 @@
 // https://community.cloudflare.com/t/timeout-with-fetch/25249/5
-export async function fetchWithTimeout(fetchPromise: Promise<Response>, timeout = 120000): Promise<Response | null> {
+
+export async function promiseTimeoutRace<T>(thePromise: Promise<T>, timeout = 120000): Promise<T | null> {
     try {
+        let signal = new Promise(resolve => setTimeout(resolve, timeout));
 
-        let timeoutPromise = new Promise(resolve => setTimeout(resolve, timeout))
+        let race = await Promise.race([thePromise, signal])
 
-        let ret = await Promise.race([fetchPromise, timeoutPromise])
-
-        if (ret instanceof Response) {
-            return ret;
+        if (race !== null && race !== undefined) {
+            // @ts-ignore
+            return race;
         }
-
     } catch (e) {
+        console.error("promiseTimeoutRace: ", e);
     }
     return null;
 }
 
-export async function readRequestBody(request): Promise<any> {
+export async function fetchWithTimeout(fetchPromise: Promise<Response>, timeout = 120000): Promise<Response | null> {
+    return promiseTimeoutRace(fetchPromise, timeout);
+}
+
+export async function readRequestBody(request: Request): Promise<any> {
     try {
         if (request.method !== "GET") {
             let contentType = request.headers.get("content-type");
@@ -28,7 +33,7 @@ export async function readRequestBody(request): Promise<any> {
                 for (let entry of formData.entries()) {
                     body[entry[0]] = entry[1];
                 }
-                return body;
+                return {text: body};
             } else {
                 return {text: request.text()};
             }
@@ -37,6 +42,18 @@ export async function readRequestBody(request): Promise<any> {
         console.error("readRequestBody: ", e);
     }
     return {text: ""};
+}
+
+export function postBearer(data: object, apikey: string): any {
+    return {
+        headers: {
+            Authorization: `Bearer ${apikey}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+    }
 }
 
 export const NOT_FOUND = () => new Response("404 Not Found", {status: 404});
