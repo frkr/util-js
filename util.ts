@@ -67,6 +67,8 @@ export const HTML_HEADER = {
     'content-type': 'text/html;charset=UTF-8',
 };
 
+export const HTTP_CREATED = () => new Response('201 Created', {status: 201});
+export const HTTP_OK = () => new Response('200 Ok', {status: 200});
 export const NOT_FOUND = () => new Response('404 Not Found', {status: 404});
 export const UNPROCESSABLE_ENTITY = () => new Response('422 Unprocessable Content', {status: 422});
 export const INTERNAL_SERVER_ERROR = () => new Response('500 Internal Server Error', {status: 500});
