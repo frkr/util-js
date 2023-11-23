@@ -69,9 +69,11 @@ export const HTML_HEADER = {
 
 export const HTTP_CREATED = () => new Response('201 Created', {status: 201});
 export const HTTP_OK = () => new Response('200 Ok', {status: 200});
-export const NOT_FOUND = () => new Response('404 Not Found', {status: 404});
-export const UNPROCESSABLE_ENTITY = () => new Response('422 Unprocessable Content', {status: 422});
-export const INTERNAL_SERVER_ERROR = () => new Response('500 Internal Server Error', {status: 500});
+export const HTTP_NOT_FOUND = () => new Response('404 Not Found', {status: 404});
+export const HTTP_UNPROCESSABLE_ENTITY = () => new Response('422 Unprocessable Content', {status: 422});
+export const HTTP_INTERNAL_SERVER_ERROR = () => new Response('500 Internal Server Error', {status: 500});
+
+export const HTTP_UNAUTHORIZED = () => new Response('401 Unauthorized', { status: 401 });
 
 export function includesArr(arr: [], item: string) {
     for (let i = 0; i < arr.length; i++) {
