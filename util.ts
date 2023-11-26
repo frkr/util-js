@@ -90,3 +90,9 @@ export function includesArr(arr: [], item: string) {
 export function includes(str: string, item: string) {
     return str === null ? false : str.indexOf(item) !== -1;
 }
+
+export const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+    "Access-Control-Max-Age": "86400",
+};
