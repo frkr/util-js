@@ -2,6 +2,14 @@ export function isEmpty(text: string): boolean {
     return text === null || text === undefined || text === '' || text.trim() === '';
 }
 
+export function onlyNumbers(text: string): string {
+    return text.replace(/[^0-9]/g, '');
+}
+
+export function onlyAplha(text: string): string {
+    return text.replace(/[^A-Za-z]/g, '');
+}
+
 // https://community.cloudflare.com/t/timeout-with-fetch/25249/5
 
 export async function promiseTimeoutRace<T>(thePromise: Promise<T>, timeout = 120000): Promise<T | null> {
