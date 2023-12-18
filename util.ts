@@ -7,7 +7,16 @@ export function onlyNumbers(text: string): string {
 }
 
 export function onlyAplha(text: string): string {
-    return text.replace(/[^A-Za-z]/g, '');
+    return text.replace(/[^A-Za-z ]/g, '');
+}
+
+export function onlyEmail(text: string): string {
+    try {
+        return text.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)[0];
+    } catch (e) {
+    }
+
+    return null;
 }
 
 // https://community.cloudflare.com/t/timeout-with-fetch/25249/5
