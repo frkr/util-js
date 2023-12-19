@@ -1,13 +1,15 @@
+"use strict";
+
 export function isEmpty(text: string): boolean {
     return text === null || text === undefined || text === '' || text.trim() === '';
 }
 
 export function onlyNumbers(text: string): string {
-    return text.replace(/[^0-9]/g, '');
+    return new String(text).replaceAll(/[^0-9]/g, '');
 }
 
 export function onlyAplha(text: string): string {
-    return text.replace(/[^A-Za-z ]/g, '');
+    return new String(text).replaceAll(/[^A-Za-z ]/g, '');
 }
 
 export function onlyEmail(text: string): string {
