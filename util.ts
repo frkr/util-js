@@ -1,5 +1,24 @@
+"use strict";
+
 export function isEmpty(text: string): boolean {
     return text === null || text === undefined || text === '' || text.trim() === '';
+}
+
+export function onlyNumbers(text: string): string {
+    return new String(text).replaceAll(/[^0-9]/g, '');
+}
+
+export function onlyAplha(text: string): string {
+    return new String(text).replaceAll(/[^A-Za-z ]/g, '');
+}
+
+export function onlyEmail(text: string): string {
+    try {
+        return text.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)[0];
+    } catch (e) {
+    }
+
+    return null;
 }
 
 // https://community.cloudflare.com/t/timeout-with-fetch/25249/5
