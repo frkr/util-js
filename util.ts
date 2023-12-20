@@ -14,7 +14,7 @@ export function onlyAplha(text: string): string {
 
 export function onlyEmail(text: string): string {
     try {
-        return text.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)[0];
+        return text.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)[0].toLowerCase();
     } catch (e) {
     }
 
