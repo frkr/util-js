@@ -1,7 +1,11 @@
 "use strict";
 
 export function isEmpty(text: string): boolean {
-    return text === null || text === undefined || text === '' || text.trim() === '';
+    if (text === null || text === undefined) {
+        return true;
+    }
+    let rt = text.trim();
+    return rt.length === 0 || rt === 'null' || rt === 'undefined';
 }
 
 export function onlyNumbers(text: string): string {
