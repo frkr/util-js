@@ -134,3 +134,13 @@ export async function streamToArrayBuffer(stream: ReadableStream, streamSize: nu
     }
     return result;
 }
+
+export async function downloadBlob(url: string): Promise<Blob> {
+    return await (await fetch(url, {
+            headers: {
+                'User-Agent': 'PostmanRuntime/7.26.8',
+            },
+            method: 'GET',
+        },
+    )).blob();
+}
