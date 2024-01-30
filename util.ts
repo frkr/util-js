@@ -29,7 +29,7 @@ export function onlyEmail(text: string): string {
 
 export async function promiseTimeoutRace<T>(thePromise: Promise<T>, timeout = 120000): Promise<T | null> {
     try {
-        let signal = new Promise(resolve => setTimeout(resolve, timeout));
+        let signal = sleep(timeout);
 
         let race = await Promise.race([thePromise, signal]);
 
@@ -41,6 +41,10 @@ export async function promiseTimeoutRace<T>(thePromise: Promise<T>, timeout = 12
         console.error('promiseTimeoutRace: ', e);
     }
     return null;
+}
+
+export function sleep(time: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, time));
 }
 
 export async function fetchWithTimeout(fetchPromise: Promise<Response>, timeout = 120000): Promise<Response | null> {
