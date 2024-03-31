@@ -149,7 +149,7 @@ export async function downloadBlob(url: string): Promise<Blob> {
     )).blob();
 }
 
-export async function randomHEX(size = 16) {
+export async function randomHEX(size = 16): Promise<string> {
 
     return Array.from(
         new Uint8Array(
@@ -158,4 +158,26 @@ export async function randomHEX(size = 16) {
             ))).map(b => b.toString(16).padStart(2, "0"))
         .join("")
 
+}
+
+/**
+ * Fisher-Yates shuffle
+ * @param array
+ * @returns same pointer array shuffled
+ */
+export function shuffle(array: Array<any>): Array<any> {
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+    return array;
 }
