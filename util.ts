@@ -149,6 +149,12 @@ export async function downloadBlob(url: string): Promise<Blob> {
     )).blob();
 }
 
+export function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export async function randomHEX(size = 16): Promise<string> {
 
     return Array.from(
