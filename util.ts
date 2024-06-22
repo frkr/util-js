@@ -75,16 +75,34 @@ export async function readRequestBody(request: Request) {
     return {text: ''};
 }
 
-export function postBearer(data: any, apikey: string): any {
-    return {
-        headers: {
+interface postBearerProps {
+    data?: any,
+    headers?: any,
+    method?: 'POST' | string,
+    apikey: string,
+}
+
+export function postBearer({headers, apikey, method, data}: postBearerProps): any {
+    let heds = {
             Authorization: `Bearer ${apikey}`,
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(data),
-    };
+        }
+
+    if (headers) {
+        heds = {
+            ...heds,
+            ...headers,
+        }
+    }
+    let ret = {
+        headers: heds,
+        method: !data ? 'GET' : (method || 'POST'),
+    }
+    if (data) {
+        ret['body'] = JSON.stringify(data)
+    }
+    return ret
 }
 
 export const JSON_HEADER = {
