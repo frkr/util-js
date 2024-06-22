@@ -166,3 +166,63 @@ export async function downloadBlob(url: string): Promise<Blob> {
         },
     )).blob();
 }
+
+export function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export async function randomHEX(size = 16): Promise<string> {
+
+    return Array.from(
+        new Uint8Array(
+            await crypto.subtle.digest("sha-512",
+                crypto.getRandomValues(new Uint8Array(size))
+            ))).map(b => b.toString(16).padStart(2, "0"))
+        .join("")
+
+}
+
+/**
+ * Fisher-Yates shuffle
+ * @param array
+ * @returns same pointer array shuffled
+ */
+export function shuffle(array: Array<any>): Array<any> {
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
+export function getUniqueListBy(arr: any[], key: string) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+}
+
+export function toBinary(string) {
+    const codeUnits = new Uint16Array(string.length);
+    for (let i = 0; i < codeUnits.length; i++) {
+        codeUnits[i] = string.charCodeAt(i);
+    }
+    return btoa(String.fromCharCode(...new Uint8Array(codeUnits.buffer)));
+}
+
+export function fromBinary(encoded) {
+    const binary = atob(encoded);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    return String.fromCharCode(...new Uint16Array(bytes.buffer));
+}
