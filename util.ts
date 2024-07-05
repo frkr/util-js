@@ -13,7 +13,7 @@ export function onlyNumbers(text: string): string {
 }
 
 export function onlyAplha(text: string): string {
-    return new String(text).replaceAll(/[^A-Za-z ]/g, '');
+    return new String(text).replaceAll(/[^A-Za-z áéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ]/g, '');
 }
 
 export function onlyEmail(text: string): string {
@@ -84,10 +84,10 @@ interface postBearerProps {
 
 export function postBearer({headers, apikey, method, data}: postBearerProps): any {
     let heds = {
-            Authorization: `Bearer ${apikey}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
+        Authorization: `Bearer ${apikey}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
 
     if (headers) {
         heds = {
