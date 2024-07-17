@@ -4,7 +4,7 @@ export function isEmpty(text: string): boolean {
     if (text === null || text === undefined) {
         return true;
     }
-    let rt = text.trim();
+    let rt = (text + '').trim();
     return rt.length === 0 || rt === 'null' || rt === 'undefined';
 }
 
