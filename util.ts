@@ -8,7 +8,7 @@ export function isEmpty(text: any): boolean {
     return rt.length === 0 || rt === 'null' || rt === 'undefined' || rt === 'unknown';
 }
 
-export function isEmptyOr(text: any, or: string): string {
+export function isEmptyOr(text: any, or: string = ''): string {
     return isEmpty(text) ? or : (text + '');
 }
 
@@ -211,6 +211,7 @@ export function shuffle(array: Array<any>): Array<any> {
 }
 
 export function getUniqueListBy(arr: any[], key: string) {
+    // @ts-ignore
     return [...new Map(arr.map(item => [item[key], item])).values()]
 }
 
@@ -219,6 +220,7 @@ export function toBinary(string) {
     for (let i = 0; i < codeUnits.length; i++) {
         codeUnits[i] = string.charCodeAt(i);
     }
+    // @ts-ignore
     return btoa(String.fromCharCode(...new Uint8Array(codeUnits.buffer)));
 }
 
@@ -228,5 +230,6 @@ export function fromBinary(encoded) {
     for (let i = 0; i < bytes.length; i++) {
         bytes[i] = binary.charCodeAt(i);
     }
+    // @ts-ignore
     return String.fromCharCode(...new Uint16Array(bytes.buffer));
 }
