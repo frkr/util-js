@@ -101,7 +101,7 @@ export function postBearer({headers, apikey, method, data}: postBearerProps): an
     }
     let ret = {
         headers: heds,
-        method: !data ? 'GET' : (method || 'POST'),
+        method: method || (!data ? "GET" : "POST"),
     }
     if (data) {
         ret['body'] = JSON.stringify(data)
