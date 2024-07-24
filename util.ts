@@ -82,7 +82,7 @@ export async function readRequestBody(request: Request) {
 interface postBearerProps {
     data?: any,
     headers?: any,
-    method?: 'POST' | string,
+    method?: "POST" | "PUT" | "GET" | "DELETE" | string,
     apikey: string,
 }
 
