@@ -20,6 +20,15 @@ export function onlyAplha(text: string): string {
     return new String(text).replaceAll(/[^A-Za-z áéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ]/g, '');
 }
 
+export function limitText(value: string, limit = 50) {
+    let data = onlyAplha(value).trim();
+    if (data.length > limit) {
+        return data.substring(0, limit);
+    }
+    return data;
+}
+
+
 export function onlyEmail(text: string): string {
     try {
         return text.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)[0].toLowerCase();
