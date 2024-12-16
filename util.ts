@@ -16,18 +16,24 @@ export function onlyNumbers(text: string): string {
     return new String(text).replaceAll(/[^0-9]/g, '');
 }
 
+const alpha = /[^A-Za-z áéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ]/g
+const alphaDot = /[^A-Za-z áéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ\\.]/g
+
 export function onlyAplha(text: string): string {
-    return new String(text).replaceAll(/[^A-Za-z áéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ]/g, '');
+    return new String(text).replaceAll(alpha, '');
+}
+
+export function onlyAplhaDot(text: string): string {
+    return new String(text).replaceAll(alphaDot, '');
 }
 
 export function limitText(value: string, limit = 50) {
-    let data = onlyAplha(value).trim();
+    let data = onlyAplhaDot(value).trim();
     if (data.length > limit) {
         return data.substring(0, limit);
     }
     return data;
 }
-
 
 export function onlyEmail(text: string): string {
     try {
